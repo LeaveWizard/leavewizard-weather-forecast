@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestProfile xmlns="http://www.specflow.org/schemas/plus/TestProfile/1.5">
+    <Settings projectName="LeaveWizard.WeatherForecast.Api.Test" projectId="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}" />
+    <Execution stopAfterFailures="0" testThreadCount="1" testSchedulingMode="Sequential" retryCount="0" apartmentState="MTA"  />
+    <Environment testThreadIsolation="Process" platform="x86"/>
+    <TestAssemblyPaths>
+        <TestAssemblyPath>LeaveWizard.WeatherForecast.Api.Specs.dll</TestAssemblyPath>
+    </TestAssemblyPaths>
+    <Report>
+        <Template name="Report\ReportTemplate.cshtml"/>
+    </Report>
+
+    <Targets>
+       
+    </Targets>
+</TestProfile>
