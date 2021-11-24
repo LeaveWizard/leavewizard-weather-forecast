@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Net;
 using FluentAssertions;
 using LeaveWizard.WeatherForecast.Api.Specs.Context;
-using LeaveWizard.WeatherForecast.Api.Specs.Models;
+using LeaveWizard.WeatherForecast.Api.Specs.Drivers;
 using TechTalk.SpecFlow;
 
 namespace LeaveWizard.WeatherForecast.Api.Specs.Steps
@@ -10,16 +10,14 @@ namespace LeaveWizard.WeatherForecast.Api.Specs.Steps
     [Binding]
     public class WeatherPredictionSteps
     { 
-        private readonly UserContext _userContext;
-        private readonly WebApiContext _webApiContext;
+        private readonly WebApiDriver _webApiDriver;
         private readonly WeatherForecastContext _weatherForecastContext;
 
-        public WeatherPredictionSteps(UserContext userContext, 
-            WebApiContext webApiContext,
+        public WeatherPredictionSteps( 
+            WebApiDriver webApiDriver,
             WeatherForecastContext weatherForecastContext) 
         {
-            _userContext = userContext;
-            _webApiContext = webApiContext;
+            _webApiDriver = webApiDriver;
             _weatherForecastContext = weatherForecastContext;
         }
         
@@ -32,8 +30,9 @@ namespace LeaveWizard.WeatherForecast.Api.Specs.Steps
         [When(@"a request is made to predict the weather")]
         public void WhenARequestIsMadeToPredictTheWeather()
         {
-            var response = _webApiContext.ExecuteGet<List<WeatherForecast>>(EndpointRoutes.GetWeatherForecast);
+            var response = _webApiDriver.ExecuteGet<List<WeatherForecast>>(EndpointRoutes.GetWeatherForecast);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
+            
             _weatherForecastContext.ReceivedForecast = response.ResponseData; 
         }
 
